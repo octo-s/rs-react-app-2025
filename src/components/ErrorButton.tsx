@@ -1,13 +1,11 @@
 import React from 'react';
 
-interface ErrorButtonProps {}
-
 interface ErrorButtonState {
   hasError: boolean;
 }
 
 export default class ErrorButton extends React.Component<
-  ErrorButtonProps,
+  object,
   ErrorButtonState
 > {
   state = { hasError: false };

@@ -5,8 +5,6 @@ import SearchBar from './SearchBar.tsx';
 import Results from './Results';
 import ErrorButton from './ErrorButton.tsx';
 
-interface AppProps {}
-
 interface AppState {
   searchQuery: string;
   loading: boolean;
@@ -21,7 +19,7 @@ const defaultState = {
   characters: [],
 };
 
-export default class App extends React.Component<AppProps, AppState> {
+export default class App extends React.Component<object, AppState> {
   state: AppState = defaultState;
   componentDidMount() {
     const savedQuery = localStorage.getItem('searchQuery') || '';

@@ -11,7 +11,8 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "format:fix": "prettier --write .",
-    "precommit": "npm run lint && npm run format:fix"
+    "precommit": "npm run lint && npm run format:fix",
+    "prepare": "husky"
   },
   "dependencies": {
     "react": "^19.1.0",
