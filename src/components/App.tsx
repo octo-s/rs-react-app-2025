@@ -30,17 +30,23 @@ export default class App extends React.Component<object, AppState> {
 
   loadCharacters = async (searchQuery: string) => {
     this.setState({ loading: true, error: null });
+    const { data, error } = await fetchCharacters(searchQuery.trim());
 
-    try {
-      const data = await fetchCharacters(searchQuery.trim());
+    if (data) {
       this.setState({
         characters: data.results,
         loading: false,
         error: null,
       });
-    } catch (error) {
+    }
+
+    if (error) {
       console.error('Error fetching characters:', error);
-      this.setState(defaultState);
+      this.setState({
+        loading: false,
+        error,
+        characters: [],
+      });
     }
   };
 

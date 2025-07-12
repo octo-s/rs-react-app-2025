@@ -8,13 +8,16 @@ export interface Character {
 }
 
 export interface FetchCharactersResponse {
-  info: {
-    count: number;
-    pages: number;
-    next: string | null;
-    prev: string | null;
-  };
-  results: Character[];
+  error?: string;
+  data: {
+    info: {
+      count: number;
+      pages: number;
+      next: string | null;
+      prev: string | null;
+    };
+    results: Character[];
+  } | null;
 }
 
 export async function fetchCharacters(
@@ -28,10 +31,21 @@ export async function fetchCharacters(
   const url = `https://rickandmortyapi.com/api/character/?${params.toString()}`;
   const response = await fetch(url);
 
+  if (response.status === 404) {
+    return {
+      error: `${response.status} ${response.statusText} No results found for name ${name}`,
+      data: null,
+    };
+  }
+
   if (!response.ok) {
-    throw new Error(`API error: ${response.status} ${response.statusText}`);
+    return {
+      error: `API error: ${response.status} ${response.statusText}`,
+      data: null,
+    };
   }
 
   const data = await response.json();
-  return data;
+
+  return { data };
 }
