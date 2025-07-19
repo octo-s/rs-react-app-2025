@@ -8,19 +8,23 @@ interface CardProps {
 export default class Card extends React.Component<CardProps> {
   render() {
     const { character } = this.props;
+    const name = character.name || 'Unknown name';
+    const species = character.species || 'Unknown species';
+    const status = character.status || 'Unknown status';
+    const image = character.image || 'https://placehold.co/300x300/png';
 
     return (
-      <div className="border p-4 rounded shadow bg-gray-50 flex space-x-4">
-        <img
-          src={character.image}
-          alt={character.name}
-          className="w-24 h-24 rounded"
-        />
-        <div>
-          <h3 className="text-lg font-bold">{character.name}</h3>
+      <div
+        className="border p-4 rounded shadow bg-gray-50 flex space-x-4"
+        data-testid="character-card"
+      >
+        <img src={image} alt={name} className="w-24 h-24 rounded" />
+        <div data-testid={`character-details-${character.id}`}>
+          <h3 className="text-lg font-bold">{name}</h3>
           <p className="text-gray-700">
-            {character.species} - {character.status}
+            {species} - {status}
           </p>
+          https://rickandmortyapi.com/api/character/avatar/1.jpeg
         </div>
       </div>
     );

@@ -7,15 +7,17 @@ export interface Character {
   image: string;
 }
 
+export interface Info {
+  count: number;
+  pages: number;
+  next: string | null;
+  prev: string | null;
+}
+
 export interface FetchCharactersResponse {
   error?: string;
   data: {
-    info: {
-      count: number;
-      pages: number;
-      next: string | null;
-      prev: string | null;
-    };
+    info: Info;
     results: Character[];
   } | null;
 }

@@ -20,13 +20,16 @@ export default class Results extends React.Component<ResultsProps> {
         {loading && <Spinner />}
 
         {error && (
-          <div className="p-4 bg-red-100 text-red-700 rounded mb-4">
+          <div
+            className="p-4 bg-red-100 text-red-700 rounded mb-4"
+            data-testid="error-message"
+          >
             Error: {error}
           </div>
         )}
 
         {!loading && !error && characters.length === 0 && (
-          <p>No results found.</p>
+          <p data-testid="not-found">No results found.</p>
         )}
 
         {!loading && !error && characters.length > 0 && (

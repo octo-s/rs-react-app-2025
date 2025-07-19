@@ -35,15 +35,17 @@ export default class SearchBar extends React.Component<
   render() {
     return (
       <div className="bg-white p-4 rounded shadow">
-        <div className="flex space-x-2  flex items-center justify-center">
+        <div className="space-x-2 flex items-center justify-center">
           <input
             type="text"
             value={this.state.value}
             onChange={this.handleChange}
             className="flex-1 px-4 py-2 border rounded"
+            data-testid="search-input"
             placeholder="Search characters by name..."
           />
           <button
+            data-testid="search-button"
             onClick={this.handleSearch}
             className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
           >

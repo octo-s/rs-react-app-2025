@@ -3,7 +3,10 @@ import React from 'react';
 export default class Spinner extends React.Component {
   render() {
     return (
-      <div className="flex justify-center items-center py-8">
+      <div
+        className="flex justify-center items-center py-8"
+        data-testid="spinner"
+      >
         <div className="w-12 h-12 border-4 border-blue-500 border-dashed rounded-full animate-spin" />
       </div>
     );
