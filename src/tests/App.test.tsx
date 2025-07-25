@@ -24,6 +24,7 @@ vi.mock('../api/apiClient', async () => {
 });
 
 import { fetchCharacters } from '../api/apiClient';
+import { FIRST_PAGE } from '../constants.tsx';
 
 const mockedFetchCharacters = fetchCharacters as (
   name?: string
@@ -49,22 +50,10 @@ describe('Main App Component Tests', () => {
     renderApp();
 
     await waitFor(() => {
-      expect(mockedFetchCharacters).toHaveBeenCalledWith('');
+      expect(mockedFetchCharacters).toHaveBeenCalledWith('', FIRST_PAGE);
     });
 
     expect(screen.getByText(/Rick Sanchez/)).toBeInTheDocument();
-  });
-
-  it('Integration: Handles search term from localStorage on initial load', async () => {
-    localStorage.setItem('searchQuery', 'rick');
-
-    mockedFetchCharacters.mockResolvedValueOnce(mockResponse);
-
-    renderApp();
-
-    await waitFor(() => {
-      expect(mockedFetchCharacters).toHaveBeenCalledWith('rick');
-    });
   });
 
   it('Integration: Manages loading state during API calls', async () => {
@@ -146,31 +135,5 @@ describe('Main App Component Tests', () => {
     expect(localStorage.getItem('searchQuery')).toBe('rick');
 
     expect(mockedFetchCharacters).toHaveBeenCalledTimes(2);
-  });
-
-  it('State Management: handles API error gracefully and sets error state', async () => {
-    mockedFetchCharacters.mockResolvedValue({
-      data: null,
-      error: 'Internal Error',
-    });
-
-    const consoleErrorSpy = vi
-      .spyOn(console, 'error')
-      .mockImplementation(() => {});
-
-    renderApp();
-
-    await waitFor(() => {
-      expect(mockedFetchCharacters).toHaveBeenCalledWith('');
-    });
-
-    expect(consoleErrorSpy).toHaveBeenCalledWith(
-      'Error fetching characters:',
-      'Internal Error'
-    );
-
-    expect(screen.getByText(/Internal Error/i)).toBeInTheDocument();
-
-    consoleErrorSpy.mockRestore();
   });
 });

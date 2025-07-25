@@ -23,13 +23,15 @@ export interface FetchCharactersResponse {
 }
 
 export async function fetchCharacters(
-  name: string = ''
+  name: string | undefined = '',
+  page: number = 1
 ): Promise<FetchCharactersResponse> {
   const params = new URLSearchParams();
   if (name !== '') {
     params.append('name', name);
-    params.append('page', '1');
   }
+  params.append('page', String(page));
+
   const url = `https://rickandmortyapi.com/api/character/?${params.toString()}`;
   const response = await fetch(url);
 

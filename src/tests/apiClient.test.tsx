@@ -1,6 +1,7 @@
 import { beforeEach, vi, describe, it, expect } from 'vitest';
 import { mockCharacters } from './testUtils/mockData.ts';
 import { fetchCharacters } from '../api/apiClient';
+import { FIRST_PAGE } from '../constants.tsx';
 
 describe('API Integration Tests', () => {
   beforeEach(() => {
@@ -20,7 +21,7 @@ describe('API Integration Tests', () => {
       })
     );
 
-    const res = await fetchCharacters('Rick');
+    const res = await fetchCharacters('Rick', 1);
 
     expect(res.error).toBeUndefined();
     expect(res.data?.results[0].name).toBe('Rick Sanchez');
@@ -37,7 +38,7 @@ describe('API Integration Tests', () => {
       })
     );
 
-    const res = await fetchCharacters('UnknownName');
+    const res = await fetchCharacters('UnknownName', FIRST_PAGE);
 
     expect(res.error).toMatch(/404 Not Found/);
     expect(res.data).toBeNull();

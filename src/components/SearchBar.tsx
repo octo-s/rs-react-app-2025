@@ -1,58 +1,44 @@
 import React from 'react';
 
 interface SearchProps {
-  onSearch: (searchQuery: string) => void;
-  initialValue: string;
-}
-
-interface SearchState {
+  onSearch: () => void;
+  onChange: (value: string) => void;
   value: string;
 }
 
-export default class SearchBar extends React.Component<
-  SearchProps,
-  SearchState
-> {
-  state: SearchState = {
-    value: this.props.initialValue || '',
+const SearchBar: React.FC<SearchProps> = ({ onSearch, value, onChange }) => {
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    onChange(event.target.value);
   };
 
-  componentDidUpdate(prevProps: SearchProps) {
-    if (prevProps.initialValue !== this.props.initialValue) {
-      this.setState({ value: this.props.initialValue });
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === 'Enter') {
+      onSearch();
     }
-  }
-  handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    this.setState({ value: event.target.value });
   };
 
-  handleSearch = () => {
-    const trimmed = this.state.value.trim();
-    localStorage.setItem('searchQuery', trimmed);
-    this.props.onSearch(trimmed);
-  };
-
-  render() {
-    return (
-      <div className="bg-white p-4 rounded shadow">
-        <div className="space-x-2 flex items-center justify-center">
-          <input
-            type="text"
-            value={this.state.value}
-            onChange={this.handleChange}
-            className="flex-1 px-4 py-2 border rounded"
-            data-testid="search-input"
-            placeholder="Search characters by name..."
-          />
-          <button
-            data-testid="search-button"
-            onClick={this.handleSearch}
-            className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
-          >
-            Search
-          </button>
-        </div>
+  return (
+    <div className="bg-white p-4 rounded shadow">
+      <div className="space-x-2 flex items-center justify-center">
+        <input
+          type="text"
+          value={value}
+          onChange={handleChange}
+          onKeyDown={handleKeyDown}
+          className="flex-1 px-4 py-2 border rounded"
+          data-testid="search-input"
+          placeholder="Search characters by name..."
+        />
+        <button
+          data-testid="search-button"
+          onClick={onSearch}
+          className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+        >
+          Search
+        </button>
       </div>
-    );
-  }
-}
+    </div>
+  );
+};
+
+export default SearchBar;
