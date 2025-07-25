@@ -67,7 +67,8 @@ export const useSearch = () => {
       dispatch({ type: 'setQuery', payload: { query, page } });
       dispatch({ type: 'fetchStart' });
 
-      const { data, error } = await fetchCharacters(query, page);
+      const result = (await fetchCharacters(query, page)) || {};
+      const { data, error } = result;
 
       if (data) {
         dispatch({

@@ -29,6 +29,14 @@ describe('Search Integration', () => {
   beforeEach(() => {
     localStorage.clear();
     vi.resetAllMocks();
+
+    mockedFetchCharacters.mockResolvedValue({
+      data: {
+        results: [],
+        info: { pages: 1, count: 0, next: null, prev: null },
+      },
+      error: null,
+    });
   });
 
   it('User Interaction: updates input value when user types', async () => {

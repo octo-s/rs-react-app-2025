@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 import SearchBar from './SearchBar.tsx';
 import Results from './Results';
@@ -12,13 +12,14 @@ const Search: React.FC = () => {
     useSearch();
   const [searchQuery, setSearchQuery] = useLocalStorage('searchQuery', query);
   const [value, setValue] = useState(searchQuery);
+  const initialQueryRef = useRef(searchQuery);
 
   useEffect(() => {
     search({
-      query: searchQuery,
+      query: initialQueryRef.current,
       page: FIRST_PAGE,
     });
-  }, [search, searchQuery]);
+  }, [search]);
 
   const handleSearch = () => {
     const trimmed = value.trim();
