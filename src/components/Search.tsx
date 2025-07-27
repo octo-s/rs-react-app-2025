@@ -9,21 +9,22 @@ import { FIRST_PAGE } from '../constants.tsx';
 import { Outlet, useParams, useSearchParams } from 'react-router';
 
 const Search: React.FC = () => {
+  const { id } = useParams();
+
   const { query, loading, error, results, totalPages, search } = useSearch();
   const [searchQuery, setSearchQuery] = useLocalStorage('searchQuery', query);
   const [value, setValue] = useState(searchQuery);
-  const initialQueryRef = useRef(searchQuery);
   const [params, setParams] = useSearchParams();
-  const { id } = useParams();
-
-  const initialPage = Number(params.get('page')) || FIRST_PAGE;
+  const paramsPage = Number(params.get('page')) || FIRST_PAGE;
+  const initialQueryRef = useRef(searchQuery);
+  const initialPageRef = useRef(paramsPage);
 
   useEffect(() => {
     search({
       query: initialQueryRef.current,
-      page: initialPage,
+      page: initialPageRef.current,
     });
-  }, [search, initialPage]);
+  }, [search, initialPageRef]);
 
   const handleSearch = () => {
     const trimmed = value.trim();
@@ -59,7 +60,7 @@ const Search: React.FC = () => {
         <Outlet />
       </div>
       <Pagination
-        page={initialPage}
+        page={paramsPage}
         onPageChange={handlePageChange}
         totalPages={totalPages}
       />
