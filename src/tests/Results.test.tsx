@@ -1,8 +1,8 @@
 import { screen } from '@testing-library/react';
 import Results from '../components/Results';
 import { describe, it, expect } from 'vitest';
-import { mockCharacters } from './testUtils/mockData.ts';
 import { renderWithRouter } from './testUtils/renderWithRouter.tsx';
+import { mockCharacters } from '../mocks/ characters.ts';
 
 describe('Results Component Tests', () => {
   it('Rendering: renders correct number of items when data is provided', () => {

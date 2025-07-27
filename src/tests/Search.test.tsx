@@ -5,6 +5,11 @@ import userEvent from '@testing-library/user-event';
 import { FIRST_PAGE } from '../constants.tsx';
 import { renderWithRouter } from './testUtils/renderWithRouter.tsx';
 import { MemoryRouter, Route, Routes } from 'react-router';
+import { INITIAL_STATE, reducer } from '../hooks/useSearch.tsx';
+import { mockRick } from '../mocks/ characters.ts';
+import { fetchCharacters } from '../api/apiClient';
+import ErrorBoundary from '../components/ErrorBoundary.tsx';
+import type { FetchCharactersResponse } from '../types.ts';
 
 vi.mock('../api/apiClient', async () => {
   const actual =
@@ -17,14 +22,6 @@ vi.mock('../api/apiClient', async () => {
     fetchCharacters: vi.fn(),
   };
 });
-
-import {
-  fetchCharacters,
-  type FetchCharactersResponse,
-} from '../api/apiClient';
-import ErrorBoundary from '../components/ErrorBoundary.tsx';
-import { INITIAL_STATE, reducer } from '../hooks/useSearch.tsx';
-import { mockRick } from './testUtils/mockData.ts';
 
 const MOCK_STATE = {
   query: 'Morty',

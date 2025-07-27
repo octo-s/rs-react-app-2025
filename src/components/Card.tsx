@@ -1,10 +1,10 @@
 import React from 'react';
-import type { Character } from '../api/apiClient';
 import { useNavigate, useLocation } from 'react-router';
+import type { Character } from '../types.ts';
 
-interface CardProps {
+type CardProps = {
   character: Character;
-}
+};
 
 const Card: React.FC<CardProps> = ({ character }) => {
   const name = character.name || 'Unknown name';

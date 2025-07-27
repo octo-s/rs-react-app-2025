@@ -1,4 +1,5 @@
 import React from 'react';
+import { TEXTS } from '../texts.ts';
 
 type PaginationProps = {
   page: number;
@@ -23,7 +24,7 @@ const Pagination: React.FC<PaginationProps> = ({
         &lt;
       </button>
       <span className="mx-2 font-semibold">
-        Page {page} of {totalPages}
+        {TEXTS.pagination(page, totalPages)}
       </span>
       <button
         onClick={() => onPageChange(page + 1)}

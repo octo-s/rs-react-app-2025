@@ -1,7 +1,7 @@
 import { beforeEach, vi, describe, it, expect } from 'vitest';
-import { mockCharacters, mockRick } from './testUtils/mockData.ts';
 import { fetchCharacterById, fetchCharacters } from '../api/apiClient';
 import { FIRST_PAGE } from '../constants.tsx';
+import { mockCharacters, mockRick } from '../mocks/ characters.ts';
 
 describe('API Integration Tests: fetchCharacters', () => {
   beforeEach(() => {

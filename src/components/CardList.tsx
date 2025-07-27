@@ -1,10 +1,10 @@
 import React from 'react';
-import type { Character } from '../api/apiClient';
 import Card from './Card';
+import type { Character } from '../types.ts';
 
-interface CardListProps {
+type CardListProps = {
   characters: Character[];
-}
+};
 
 const CardList: React.FC<CardListProps> = ({ characters }) => {
   return (

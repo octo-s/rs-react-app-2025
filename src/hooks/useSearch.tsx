@@ -1,6 +1,7 @@
 import { useReducer, useCallback } from 'react';
-import { fetchCharacters, type Character } from '../api/apiClient';
+import { fetchCharacters } from '../api/apiClient';
 import { FIRST_PAGE } from '../constants.tsx';
+import type { Character } from '../types.ts';
 
 type SearchParams = {
   query: string;

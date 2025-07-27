@@ -1,43 +1,7 @@
-export type Character = {
-  id: number;
-  name: string;
-  status: string;
-  species: string;
-  type: string;
-  gender: string;
-  origin: {
-    name: string;
-    url: string;
-  };
-  location: {
-    name: string;
-    url: string;
-  };
-  image: string;
-  episode: string[];
-  url: string;
-  created: string;
-};
-
-export interface Info {
-  count: number;
-  pages: number;
-  next: string | null;
-  prev: string | null;
-}
-
-export interface FetchCharactersResponse {
-  error?: string;
-  data: {
-    info: Info;
-    results: Character[];
-  } | null;
-}
-
-export interface FetchCharacterResponse {
-  error?: string;
-  data: Character | null;
-}
+import type {
+  FetchCharacterResponse,
+  FetchCharactersResponse,
+} from '../types.ts';
 
 export async function fetchCharacters(
   name: string | undefined = '',

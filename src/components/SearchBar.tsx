@@ -1,11 +1,12 @@
 import React from 'react';
 import Button from './Button.tsx';
+import { TEXTS } from '../texts.ts';
 
-interface SearchProps {
+type SearchProps = {
   onSearch: () => void;
   onChange: (value: string) => void;
   value: string;
-}
+};
 
 const SearchBar: React.FC<SearchProps> = ({ onSearch, value, onChange }) => {
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -28,12 +29,12 @@ const SearchBar: React.FC<SearchProps> = ({ onSearch, value, onChange }) => {
           onKeyDown={handleKeyDown}
           className="flex-1 px-4 py-2 border rounded"
           data-testid="search-input"
-          placeholder="Search characters by name..."
+          placeholder={TEXTS.searchPlaceholder}
         />
         <Button
           data-testid="search-button"
           onClick={onSearch}
-          text="Search"
+          text={TEXTS.searchButton}
           className="ml-8"
         />
       </div>

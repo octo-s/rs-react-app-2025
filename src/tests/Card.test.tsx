@@ -1,11 +1,11 @@
 import { render, screen } from '@testing-library/react';
 import Card from '../components/Card';
 import { describe, it, expect } from 'vitest';
-import { mockRick } from './testUtils/mockData.ts';
 import { renderWithRouter } from './testUtils/renderWithRouter.tsx';
 import { MemoryRouter, Route, Routes } from 'react-router';
 import userEvent from '@testing-library/user-event';
 import { LocationDisplay } from './testUtils/LocationDisplay.tsx';
+import { mockRick } from '../mocks/ characters.ts';
 
 describe('Card component tests', () => {
   it('Rendering: Displays item name and description correctly', () => {

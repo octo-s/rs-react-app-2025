@@ -1,8 +1,4 @@
-import type {
-  Character,
-  FetchCharactersResponse,
-  Info,
-} from '../../api/apiClient.ts';
+import type { Character } from '../types.ts';
 
 export const mockRick: Character = {
   id: 1,
@@ -46,24 +42,4 @@ export const mockMorty: Character = {
   created: '2017-11-04T18:48:46.250Z',
 };
 
-export const mockInfo: Info = {
-  count: 0,
-  pages: 0,
-  next: null,
-  prev: null,
-};
-
 export const mockCharacters: Character[] = [mockRick, mockMorty];
-
-export const mockResponse: FetchCharactersResponse = {
-  data: {
-    results: mockCharacters,
-    info: {
-      count: 0,
-      pages: 0,
-      next: null,
-      prev: null,
-    },
-  },
-  error: undefined,
-};

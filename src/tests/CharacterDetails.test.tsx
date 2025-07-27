@@ -3,9 +3,9 @@ import userEvent from '@testing-library/user-event';
 import { Routes, Route } from 'react-router';
 import CharacterDetails from '../components/CharacterDetails';
 import * as api from '../api/apiClient';
-import { mockRick } from './testUtils/mockData';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { renderWithRouter } from './testUtils/renderWithRouter.tsx';
+import { mockRick } from '../mocks/ characters.ts';
 
 describe('CharacterDetails component tests', () => {
   beforeEach(() => {

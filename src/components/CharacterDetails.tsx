@@ -1,7 +1,9 @@
 import { useParams, useNavigate } from 'react-router';
 import { useEffect, useState } from 'react';
-import { type Character, fetchCharacterById } from '../api/apiClient';
+import { fetchCharacterById } from '../api/apiClient';
 import Spinner from './Spinner.tsx';
+import type { Character } from '../types.ts';
+import { TEXTS } from '../texts.ts';
 
 const CharacterDetails = () => {
   const { id } = useParams();
@@ -33,7 +35,7 @@ const CharacterDetails = () => {
         </button>
         {loading && <Spinner />}
         {!character && !loading && (
-          <div className="p-4 text-red-600">Character not found</div>
+          <div className="p-4 text-red-600">{TEXTS.noCharacter}</div>
         )}
         {character && !loading && (
           <div className="bg-white p-4 pt-14 rounded shadow min-h-[200px]">
@@ -50,45 +52,45 @@ const CharacterDetails = () => {
             <div className="text-m space-y-1 mt-auto">
               <div>
                 <span className="font-semibold text-gray-600 mr-1">
-                  Status:
+                  {TEXTS.status}
                 </span>
                 <span className="text-gray-800">{character.status}</span>
               </div>
               <div>
                 <span className="font-semibold text-gray-600 mr-1">
-                  Species:
+                  {TEXTS.species}
                 </span>
                 <span className="text-gray-800">{character.species}</span>
               </div>
               {character.type && (
                 <div>
                   <span className="font-semibold text-gray-600 mr-1">
-                    Type:
+                    {TEXTS.type}
                   </span>
                   <span className="text-gray-800">{character.type}</span>
                 </div>
               )}
               <div>
                 <span className="font-semibold text-gray-600 mr-1">
-                  Gender:
+                  {TEXTS.gender}
                 </span>
                 <span className="text-gray-800">{character.gender}</span>
               </div>
               <div>
                 <span className="font-semibold text-gray-600  mr-1">
-                  Origin:
+                  {TEXTS.origin}
                 </span>
                 <span className="text-gray-800">{character.origin.name}</span>
               </div>
               <div>
                 <span className="font-semibold text-gray-600 mr-1">
-                  Location:
+                  {TEXTS.location}
                 </span>
                 <span className="text-gray-800">{character.location.name}</span>
               </div>
               <div>
                 <span className="font-semibold text-gray-600 mr-1">
-                  Created:
+                  {TEXTS.created}
                 </span>
                 <span className="text-gray-800">
                   {new Date(character.created).toLocaleString()}

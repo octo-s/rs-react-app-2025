@@ -1,18 +1,19 @@
 import React from 'react';
 import { useNavigate } from 'react-router';
 import Button from './Button.tsx';
+import { TEXTS } from '../texts.ts';
 
 const NotFound: React.FC = () => {
   const navigate = useNavigate();
 
   return (
     <div className="flex flex-col items-center justify-center min-h-[60vh] text-center">
-      <h1 className="text-4xl font-bold mb-4 text-red-600">404</h1>
-      <p className="text-xl mb-6">
-        Sorry, the page you’re looking for doesn’t exist.
-      </p>
+      <h1 className="text-4xl font-bold mb-4 text-red-600">
+        {TEXTS.notFoundTitle}
+      </h1>
+      <p className="text-xl mb-6">{TEXTS.notExist}</p>
       <Button
-        text={'Back to Home'}
+        text={TEXTS.backToHome}
         onClick={() => navigate('/')}
         className="mt-4"
       />
