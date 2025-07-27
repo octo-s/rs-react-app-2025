@@ -1,8 +1,11 @@
-import { screen } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import Card from '../components/Card';
 import { describe, it, expect } from 'vitest';
 import { mockRick } from './testUtils/mockData.ts';
 import { renderWithRouter } from './testUtils/renderWithRouter.tsx';
+import { MemoryRouter, Route, Routes } from 'react-router';
+import userEvent from '@testing-library/user-event';
+import { LocationDisplay } from './testUtils/LocationDisplay.tsx';
 
 describe('Card component tests', () => {
   it('Rendering: Displays item name and description correctly', () => {
@@ -38,5 +41,32 @@ describe('Card component tests', () => {
     expect(
       screen.getByText(/Unknown species - Unknown status/i)
     ).toBeInTheDocument();
+  });
+
+  it('navigates to /character/:id with current search params on click', async () => {
+    render(
+      <MemoryRouter initialEntries={['/?page=1']}>
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <>
+                <Card character={mockRick} />
+                <LocationDisplay />
+              </>
+            }
+          />
+          <Route path="/character/:id" element={<LocationDisplay />} />
+        </Routes>
+      </MemoryRouter>
+    );
+
+    expect(screen.getByTestId('location').textContent).toBe('/?page=1');
+
+    await userEvent.click(screen.getByTestId('character-card'));
+
+    expect(screen.getByTestId('location').textContent).toBe(
+      '/character/1?page=1'
+    );
   });
 });

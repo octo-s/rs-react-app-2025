@@ -23,7 +23,7 @@ type Action =
   | { type: 'fetchError'; payload: string }
   | { type: 'reset' };
 
-const INITIAL_STATE: SearchState = {
+export const INITIAL_STATE: SearchState = {
   query: '',
   page: FIRST_PAGE,
   loading: false,
@@ -32,7 +32,7 @@ const INITIAL_STATE: SearchState = {
   totalPages: 0,
 };
 
-function reducer(state: SearchState, action: Action): SearchState {
+export function reducer(state: SearchState, action: Action): SearchState {
   switch (action.type) {
     case 'setQuery':
       return {

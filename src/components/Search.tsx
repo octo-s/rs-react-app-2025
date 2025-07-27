@@ -51,11 +51,11 @@ const Search: React.FC = () => {
       <SearchBar value={value} onSearch={handleSearch} onChange={onChange} />
       <div className="flex">
         <div
+          data-testid="results-block"
           className={`min-w-0 ${id ? 'w-[65%]' : 'w-full'} ${id ? 'mr-4' : 'mr-0'} transition-all duration-400 ease-in-out`}
         >
           <Results characters={results} loading={loading} error={error} />
         </div>
-
         <Outlet />
       </div>
       <Pagination

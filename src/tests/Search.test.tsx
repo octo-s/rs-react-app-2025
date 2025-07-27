@@ -1,8 +1,10 @@
-import { screen, waitFor } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import Search from '../components/Search';
 import { describe, it, expect, beforeEach, vi } from 'vitest';
 import userEvent from '@testing-library/user-event';
 import { FIRST_PAGE } from '../constants.tsx';
+import { renderWithRouter } from './testUtils/renderWithRouter.tsx';
+import { MemoryRouter, Route, Routes } from 'react-router';
 
 vi.mock('../api/apiClient', async () => {
   const actual =
@@ -21,7 +23,17 @@ import {
   type FetchCharactersResponse,
 } from '../api/apiClient';
 import ErrorBoundary from '../components/ErrorBoundary.tsx';
-import { renderWithRouter } from './testUtils/renderWithRouter.tsx';
+import { INITIAL_STATE, reducer } from '../hooks/useSearch.tsx';
+import { mockRick } from './testUtils/mockData.ts';
+
+const MOCK_STATE = {
+  query: 'Morty',
+  page: 3,
+  totalPages: 10,
+  results: [mockRick],
+  loading: true,
+  error: 'Some error',
+};
 
 const mockedFetchCharacters = fetchCharacters as (
   name?: string
@@ -127,5 +139,36 @@ describe('Search Integration', () => {
     );
 
     consoleErrorSpy.mockRestore();
+  });
+
+  it('Rendering: renders with full width when id is not present', () => {
+    render(
+      <MemoryRouter initialEntries={['/']}>
+        <Routes>
+          <Route path="/" element={<Search />} />
+        </Routes>
+      </MemoryRouter>
+    );
+    const resultsBlock = screen.getByTestId('results-block');
+    expect(resultsBlock).toHaveClass('w-full');
+    expect(resultsBlock).toHaveClass('mr-0');
+  });
+
+  it('Rendering: renders with 65% width and margin when id is present', () => {
+    render(
+      <MemoryRouter initialEntries={['/character/1']}>
+        <Routes>
+          <Route path="/character/:id" element={<Search />} />
+        </Routes>
+      </MemoryRouter>
+    );
+    const resultsBlock = screen.getByTestId('results-block');
+    expect(resultsBlock).toHaveClass('w-[65%]');
+    expect(resultsBlock).toHaveClass('mr-4');
+  });
+
+  it('returns INITIAL_STATE on reset action', () => {
+    const result = reducer(MOCK_STATE, { type: 'reset' });
+    expect(result).toEqual(INITIAL_STATE);
   });
 });
