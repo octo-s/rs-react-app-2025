@@ -1,4 +1,5 @@
 import React from 'react';
+import Button from './Button.tsx';
 
 interface SearchProps {
   onSearch: () => void;
@@ -18,8 +19,8 @@ const SearchBar: React.FC<SearchProps> = ({ onSearch, value, onChange }) => {
   };
 
   return (
-    <div className="bg-white p-4 rounded shadow">
-      <div className="space-x-2 flex items-center justify-center">
+    <div className="bg-white p-4 rounded shadow my-4">
+      <div className="space-x-2  flex items-center justify-center">
         <input
           type="text"
           value={value}
@@ -29,13 +30,12 @@ const SearchBar: React.FC<SearchProps> = ({ onSearch, value, onChange }) => {
           data-testid="search-input"
           placeholder="Search characters by name..."
         />
-        <button
+        <Button
           data-testid="search-button"
           onClick={onSearch}
-          className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
-        >
-          Search
-        </button>
+          text="Search"
+          className="ml-8"
+        />
       </div>
     </div>
   );

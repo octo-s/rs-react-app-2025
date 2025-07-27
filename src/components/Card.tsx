@@ -1,5 +1,6 @@
 import React from 'react';
 import type { Character } from '../api/apiClient';
+import { useNavigate, useLocation } from 'react-router';
 
 interface CardProps {
   character: Character;
@@ -10,11 +11,17 @@ const Card: React.FC<CardProps> = ({ character }) => {
   const species = character.species || 'Unknown species';
   const status = character.status || 'Unknown status';
   const image = character.image || 'https://placehold.co/300x300/png';
+  const navigate = useNavigate();
+  const location = useLocation();
 
+  const handleClick = () => {
+    navigate(`/character/${character.id}${location.search}`);
+  };
   return (
     <div
-      className="border p-4 rounded shadow bg-gray-50 flex space-x-4"
+      className="border p-4 rounded shadow bg-gray-50 flex space-x-4 cursor-pointer m-2"
       data-testid="character-card"
+      onClick={handleClick}
     >
       <img src={image} alt={name} className="w-24 h-24 rounded" />
       <div data-testid={`character-details-${character.id}`}>

@@ -1,8 +1,9 @@
-import { render, screen, waitFor } from '@testing-library/react';
+import { screen, waitFor } from '@testing-library/react';
 import Search from '../components/Search';
 import { describe, it, expect, beforeEach, vi } from 'vitest';
 import userEvent from '@testing-library/user-event';
 import { FIRST_PAGE } from '../constants.tsx';
+
 vi.mock('../api/apiClient', async () => {
   const actual =
     await vi.importActual<typeof import('../api/apiClient')>(
@@ -20,6 +21,7 @@ import {
   type FetchCharactersResponse,
 } from '../api/apiClient';
 import ErrorBoundary from '../components/ErrorBoundary.tsx';
+import { renderWithRouter } from './testUtils/renderWithRouter.tsx';
 
 const mockedFetchCharacters = fetchCharacters as (
   name?: string
@@ -41,7 +43,7 @@ describe('Search Integration', () => {
 
   it('User Interaction: updates input value when user types', async () => {
     const user = userEvent.setup();
-    render(<Search />);
+    renderWithRouter(<Search />);
     const input = screen.getByTestId('search-input');
 
     await user.type(input, 'Morty');
@@ -50,14 +52,14 @@ describe('Search Integration', () => {
 
   it('LocalStorage Integration: uses searchQuery from localStorage on mount', async () => {
     localStorage.setItem('searchQuery', 'rick');
-    render(<Search />);
+    renderWithRouter(<Search />);
     expect(screen.getByTestId('search-input')).toHaveValue('rick');
   });
 
   it('User Interaction: calls onSearch with trimmed input on search button click', async () => {
     const user = userEvent.setup();
 
-    render(<Search />);
+    renderWithRouter(<Search />);
     const input = screen.getByTestId('search-input');
 
     await user.clear(input);
@@ -70,7 +72,7 @@ describe('Search Integration', () => {
   });
 
   it('LocalStorage Integration: saves search query to localStorage on search', async () => {
-    render(<Search />);
+    renderWithRouter(<Search />);
 
     const user = userEvent.setup();
     const input = screen.getByTestId('search-input');
@@ -85,7 +87,7 @@ describe('Search Integration', () => {
   it('LocalStorage Integration: overwrites existing localStorage value when new search is performed', async () => {
     localStorage.setItem('searchQuery', 'Birdperson');
 
-    render(<Search />);
+    renderWithRouter(<Search />);
     expect(localStorage.getItem('searchQuery')).toBe('Birdperson');
 
     const input = screen.getByTestId('search-input');
@@ -107,7 +109,7 @@ describe('Search Integration', () => {
       .spyOn(console, 'error')
       .mockImplementation(() => {});
 
-    render(
+    renderWithRouter(
       <ErrorBoundary>
         <Search />
       </ErrorBoundary>

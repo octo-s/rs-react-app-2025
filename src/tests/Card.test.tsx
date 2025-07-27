@@ -1,11 +1,12 @@
-import { render, screen } from '@testing-library/react';
+import { screen } from '@testing-library/react';
 import Card from '../components/Card';
 import { describe, it, expect } from 'vitest';
 import { mockRick } from './testUtils/mockData.ts';
+import { renderWithRouter } from './testUtils/renderWithRouter.tsx';
 
 describe('Card component tests', () => {
   it('Rendering: Displays item name and description correctly', () => {
-    render(<Card character={mockRick} />);
+    renderWithRouter(<Card character={mockRick} />);
     expect(screen.getByText('Rick Sanchez')).toBeInTheDocument();
     expect(screen.getByText('Human - Alive')).toBeInTheDocument();
 
@@ -26,7 +27,7 @@ describe('Card component tests', () => {
       image: '',
     };
 
-    render(<Card character={incompleteCharacter} />);
+    renderWithRouter(<Card character={incompleteCharacter} />);
 
     expect(screen.getByRole('img')).toHaveAttribute(
       'src',
