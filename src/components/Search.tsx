@@ -16,15 +16,18 @@ const Search: React.FC = () => {
   const [value, setValue] = useState(searchQuery);
   const [params, setParams] = useSearchParams();
   const paramsPage = Number(params.get('page')) || FIRST_PAGE;
-  const initialQueryRef = useRef(searchQuery);
-  const initialPageRef = useRef(paramsPage);
+
+  const initialValuesRef = useRef({
+    query: searchQuery,
+    page: paramsPage,
+  });
 
   useEffect(() => {
     search({
-      query: initialQueryRef.current,
-      page: initialPageRef.current,
+      query: initialValuesRef.current.query,
+      page: initialValuesRef.current.page,
     });
-  }, [search, initialPageRef]);
+  }, [search]);
 
   const handleSearch = () => {
     const trimmed = value.trim();

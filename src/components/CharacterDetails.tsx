@@ -1,4 +1,4 @@
-import { useParams, useNavigate } from 'react-router';
+import { useParams, useNavigate, useLocation } from 'react-router';
 import { useEffect, useState } from 'react';
 import { fetchCharacterById } from '../api/apiClient';
 import Spinner from './Spinner.tsx';
@@ -8,6 +8,7 @@ import { TEXTS } from '../texts.ts';
 const CharacterDetails = () => {
   const { id } = useParams();
   const navigate = useNavigate();
+  const location = useLocation();
   const [character, setCharacter] = useState<Character | null>(null);
   const [loading, setLoading] = useState(true);
 
@@ -20,7 +21,7 @@ const CharacterDetails = () => {
       .finally(() => setLoading(false));
   }, [id]);
 
-  const handleClose = () => navigate('/');
+  const handleClose = () => navigate(`/${location.search}`);
 
   return (
     <div className="w-[35%] min-h-full relative">
