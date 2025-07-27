@@ -1,18 +1,43 @@
-import { render, screen } from '@testing-library/react';
+import { screen } from '@testing-library/react';
 import { describe, it, expect } from 'vitest';
 import Header from '../components/Header';
+import { renderWithRouter } from './testUtils/renderWithRouter.tsx';
+import { Routes, Route } from 'react-router';
+import About from '../components/About';
+import userEvent from '@testing-library/user-event';
+import Search from '../components/Search.tsx';
 
 describe('Header component tests', () => {
   it('Rendering: renders the header title', () => {
-    render(<Header />);
+    renderWithRouter(<Header />);
     expect(
       screen.getByRole('heading', { name: /rick and morty explorer/i })
     ).toBeInTheDocument();
   });
 
   it('Rendering: renders inside a header tag', () => {
-    render(<Header />);
+    renderWithRouter(<Header />);
 
     expect(screen.getByTestId('header')).toBeInTheDocument();
+  });
+
+  it('User Interaction: About button navigates to the About page', async () => {
+    const user = userEvent.setup();
+
+    renderWithRouter(
+      <>
+        <Header />
+        <Routes>
+          <Route path="/" element={<Search />} />
+          <Route path="/about" element={<About />} />
+        </Routes>
+      </>
+    );
+
+    const aboutLink = screen.getByTestId('about-link');
+    await user.click(aboutLink);
+
+    expect(screen.getByTestId('about-page')).toBeInTheDocument();
+    expect(screen.getByText(/about this app/i)).toBeInTheDocument();
   });
 });

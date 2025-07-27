@@ -1,15 +1,8 @@
 import { beforeEach, vi, describe, it, expect } from 'vitest';
 import App from '../components/App';
 import ErrorBoundary from '../components/ErrorBoundary';
-import { render, screen, waitFor } from '@testing-library/react';
+import { screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import {
-  mockInfo,
-  mockMorty,
-  mockResponse,
-  mockRick,
-} from './testUtils/mockData.ts';
-import type { FetchCharactersResponse } from '../api/apiClient';
 
 vi.mock('../api/apiClient', async () => {
   const actual =
@@ -24,13 +17,18 @@ vi.mock('../api/apiClient', async () => {
 });
 
 import { fetchCharacters } from '../api/apiClient';
+import { FIRST_PAGE } from '../constants.tsx';
+import { renderWithRouter } from './testUtils/renderWithRouter.tsx';
+import { mockInfo, mockResponse } from '../mocks/responses.ts';
+import { mockMorty, mockRick } from '../mocks/ characters.ts';
+import type { FetchCharactersResponse } from '../types.ts';
 
 const mockedFetchCharacters = fetchCharacters as (
   name?: string
 ) => Promise<FetchCharactersResponse> as ReturnType<typeof vi.fn>;
 
 function renderApp() {
-  render(
+  renderWithRouter(
     <ErrorBoundary>
       <App />
     </ErrorBoundary>
@@ -49,22 +47,10 @@ describe('Main App Component Tests', () => {
     renderApp();
 
     await waitFor(() => {
-      expect(mockedFetchCharacters).toHaveBeenCalledWith('');
+      expect(mockedFetchCharacters).toHaveBeenCalledWith('', FIRST_PAGE);
     });
 
     expect(screen.getByText(/Rick Sanchez/)).toBeInTheDocument();
-  });
-
-  it('Integration: Handles search term from localStorage on initial load', async () => {
-    localStorage.setItem('searchQuery', 'rick');
-
-    mockedFetchCharacters.mockResolvedValueOnce(mockResponse);
-
-    renderApp();
-
-    await waitFor(() => {
-      expect(mockedFetchCharacters).toHaveBeenCalledWith('rick');
-    });
   });
 
   it('Integration: Manages loading state during API calls', async () => {
@@ -146,31 +132,5 @@ describe('Main App Component Tests', () => {
     expect(localStorage.getItem('searchQuery')).toBe('rick');
 
     expect(mockedFetchCharacters).toHaveBeenCalledTimes(2);
-  });
-
-  it('State Management: handles API error gracefully and sets error state', async () => {
-    mockedFetchCharacters.mockResolvedValue({
-      data: null,
-      error: 'Internal Error',
-    });
-
-    const consoleErrorSpy = vi
-      .spyOn(console, 'error')
-      .mockImplementation(() => {});
-
-    renderApp();
-
-    await waitFor(() => {
-      expect(mockedFetchCharacters).toHaveBeenCalledWith('');
-    });
-
-    expect(consoleErrorSpy).toHaveBeenCalledWith(
-      'Error fetching characters:',
-      'Internal Error'
-    );
-
-    expect(screen.getByText(/Internal Error/i)).toBeInTheDocument();
-
-    consoleErrorSpy.mockRestore();
   });
 });

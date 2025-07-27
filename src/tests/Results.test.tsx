@@ -1,11 +1,12 @@
-import { render, screen } from '@testing-library/react';
+import { screen } from '@testing-library/react';
 import Results from '../components/Results';
 import { describe, it, expect } from 'vitest';
-import { mockCharacters } from './testUtils/mockData.ts';
+import { renderWithRouter } from './testUtils/renderWithRouter.tsx';
+import { mockCharacters } from '../mocks/ characters.ts';
 
 describe('Results Component Tests', () => {
   it('Rendering: renders correct number of items when data is provided', () => {
-    render(
+    renderWithRouter(
       <Results characters={mockCharacters} loading={false} error={null} />
     );
 
@@ -15,7 +16,7 @@ describe('Results Component Tests', () => {
   });
 
   it('Rendering: renders correct number of items when data is not provided', () => {
-    render(<Results characters={[]} loading={false} error={null} />);
+    renderWithRouter(<Results characters={[]} loading={false} error={null} />);
 
     const cards = screen.queryAllByTestId('character-card');
 
@@ -23,12 +24,12 @@ describe('Results Component Tests', () => {
   });
 
   it('Rendering: Shows loading state while fetching data', () => {
-    render(<Results characters={[]} loading={true} error={null} />);
+    renderWithRouter(<Results characters={[]} loading={true} error={null} />);
     expect(screen.getByTestId('spinner')).toBeInTheDocument();
   });
 
   it('Data Display: handles empty character list gracefully', () => {
-    render(<Results characters={[]} loading={false} error={null} />);
+    renderWithRouter(<Results characters={[]} loading={false} error={null} />);
 
     expect(screen.getByTestId('not-found')).toBeInTheDocument();
     expect(screen.getByText(/No results found/i)).toBeInTheDocument();
@@ -36,7 +37,9 @@ describe('Results Component Tests', () => {
   });
 
   it('Error Handling: displays error message when error prop is present', () => {
-    render(<Results characters={[]} loading={false} error="Network Error" />);
+    renderWithRouter(
+      <Results characters={[]} loading={false} error="Network Error" />
+    );
 
     expect(screen.getByTestId('error-message')).toBeInTheDocument();
     expect(screen.getByText(/error: network error/i)).toBeInTheDocument();

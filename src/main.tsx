@@ -3,6 +3,7 @@ import { createRoot } from 'react-dom/client';
 import './index.css';
 import App from './components/App.tsx';
 import ErrorBoundary from './components/ErrorBoundary';
+import { BrowserRouter } from 'react-router';
 
 const rootElement = document.getElementById('root');
 
@@ -13,7 +14,9 @@ if (!rootElement) {
 createRoot(rootElement).render(
   <StrictMode>
     <ErrorBoundary>
-      <App />
+      <BrowserRouter basename={import.meta.env.VITE_BASE_URL}>
+        <App />
+      </BrowserRouter>
     </ErrorBoundary>
   </StrictMode>
 );
