@@ -7,7 +7,7 @@ import userEvent from '@testing-library/user-event';
 import { LocationDisplay } from './testUtils/LocationDisplay.tsx';
 import { mockRick } from '../mocks/ characters.ts';
 
-describe('Card component tests', () => {
+describe('Card component __tests__', () => {
   it('Rendering: Displays item name and description correctly', () => {
     renderWithRouter(<Card character={mockRick} />);
     expect(screen.getByText('Rick Sanchez')).toBeInTheDocument();

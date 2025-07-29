@@ -1,6 +1,6 @@
 import React from 'react';
 import Card from './Card';
-import type { Character } from '../types.ts';
+import type { Character } from '../__utils__/characters.ts';
 
 type CardListProps = {
   characters: Character[];

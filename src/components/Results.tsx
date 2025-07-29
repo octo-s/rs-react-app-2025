@@ -1,7 +1,7 @@
 import React from 'react';
 import CardList from './CardList';
 import Spinner from './Spinner.tsx';
-import type { Character } from '../types.ts';
+import type { Character } from '../__utils__/characters.ts';
 import { TEXTS } from '../texts.ts';
 
 type ResultsProps = {

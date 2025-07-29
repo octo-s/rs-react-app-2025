@@ -1,9 +1,9 @@
 import React from 'react';
 import { useNavigate } from 'react-router';
-import Button from './Button.tsx';
 import { TEXTS } from '../texts.ts';
+import Button from '../components/Button.tsx';
 
-const NotFound: React.FC = () => {
+const NotFoundPage: React.FC = () => {
   const navigate = useNavigate();
 
   return (
@@ -21,4 +21,4 @@ const NotFound: React.FC = () => {
   );
 };
 
-export default NotFound;
+export default NotFoundPage;

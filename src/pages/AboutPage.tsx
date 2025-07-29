@@ -1,9 +1,9 @@
 import React from 'react';
-import Button from './Button.tsx';
 import { useNavigate } from 'react-router';
 import { TEXTS } from '../texts.ts';
+import Button from '../components/Button.tsx';
 
-const About: React.FC = () => {
+const AboutPage: React.FC = () => {
   const navigate = useNavigate();
 
   return (
@@ -45,4 +45,4 @@ const About: React.FC = () => {
   );
 };
 
-export default About;
+export default AboutPage;

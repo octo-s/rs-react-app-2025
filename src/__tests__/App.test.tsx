@@ -17,11 +17,11 @@ vi.mock('../api/apiClient', async () => {
 });
 
 import { fetchCharacters } from '../api/apiClient';
-import { FIRST_PAGE } from '../constants.tsx';
+import { FIRST_PAGE } from '../__utils__/constants.tsx';
 import { renderWithRouter } from './testUtils/renderWithRouter.tsx';
 import { mockInfo, mockResponse } from '../mocks/responses.ts';
 import { mockMorty, mockRick } from '../mocks/ characters.ts';
-import type { FetchCharactersResponse } from '../types.ts';
+import type { FetchCharactersResponse } from '../__utils__/characters.ts';
 
 const mockedFetchCharacters = fetchCharacters as (
   name?: string

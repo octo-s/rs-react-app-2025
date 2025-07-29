@@ -1,6 +1,6 @@
 export const TEXTS = {
   headerTitle: 'Rick and Morty Explorer',
-  searchPlaceholder: 'Search characters by name...',
+  searchPlaceholder: 'SearchPage characters by name...',
   searchButton: 'Search',
   resultsTitle: 'Results',
   noResults: 'No results found.',
@@ -9,7 +9,7 @@ export const TEXTS = {
   fallbackTitle: 'Something went wrong.',
   tryAgain: 'Try again',
   aboutLink: 'About',
-  aboutTitle: 'About this App',
+  aboutTitle: 'AboutPage this App',
   author: 'Author:',
   authorName: ' Tati Lebedeva',
   aboutText:
@@ -31,4 +31,5 @@ export const TEXTS = {
     `Page ${page} of ${totalPages}`,
   notExist: 'Sorry, the page you’re looking for doesn’t exist.',
   notFoundTitle: '404',
+  hello: 'Hello, ',
 };

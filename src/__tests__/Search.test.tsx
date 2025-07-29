@@ -1,15 +1,15 @@
 import { render, screen, waitFor } from '@testing-library/react';
-import Search from '../components/Search';
+import Search from '../components/SearchPage';
 import { describe, it, expect, beforeEach, vi } from 'vitest';
 import userEvent from '@testing-library/user-event';
-import { FIRST_PAGE } from '../constants.tsx';
+import { FIRST_PAGE } from '../__utils__/constants.tsx';
 import { renderWithRouter } from './testUtils/renderWithRouter.tsx';
 import { MemoryRouter, Route, Routes } from 'react-router';
-import { INITIAL_STATE, reducer } from '../hooks/useSearch.tsx';
+import { INITIAL_SEARCH_STATE, reducer } from '../hooks/useSearch.tsx';
 import { mockRick } from '../mocks/ characters.ts';
 import { fetchCharacters } from '../api/apiClient';
 import ErrorBoundary from '../components/ErrorBoundary.tsx';
-import type { FetchCharactersResponse } from '../types.ts';
+import type { FetchCharactersResponse } from '../__utils__/characters.ts';
 
 vi.mock('../api/apiClient', async () => {
   const actual =
@@ -36,7 +36,7 @@ const mockedFetchCharacters = fetchCharacters as (
   name?: string
 ) => Promise<FetchCharactersResponse> as ReturnType<typeof vi.fn>;
 
-describe('Search Integration', () => {
+describe('SearchPage Integration', () => {
   beforeEach(() => {
     localStorage.clear();
     vi.resetAllMocks();
@@ -166,6 +166,6 @@ describe('Search Integration', () => {
 
   it('returns INITIAL_STATE on reset action', () => {
     const result = reducer(MOCK_STATE, { type: 'reset' });
-    expect(result).toEqual(INITIAL_STATE);
+    expect(result).toEqual(INITIAL_SEARCH_STATE);
   });
 });

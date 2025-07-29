@@ -3,11 +3,11 @@ import { describe, it, expect } from 'vitest';
 import Header from '../components/Header';
 import { renderWithRouter } from './testUtils/renderWithRouter.tsx';
 import { Routes, Route } from 'react-router';
-import About from '../components/About';
+import About from '../components/AboutPage';
 import userEvent from '@testing-library/user-event';
-import Search from '../components/Search.tsx';
+import Search from '../components/SearchPage.tsx';
 
-describe('Header component tests', () => {
+describe('Header component __tests__', () => {
   it('Rendering: renders the header title', () => {
     renderWithRouter(<Header />);
     expect(
@@ -21,7 +21,7 @@ describe('Header component tests', () => {
     expect(screen.getByTestId('header')).toBeInTheDocument();
   });
 
-  it('User Interaction: About button navigates to the About page', async () => {
+  it('User Interaction: AboutPage button navigates to the AboutPage page', async () => {
     const user = userEvent.setup();
 
     renderWithRouter(

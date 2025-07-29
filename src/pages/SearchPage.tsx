@@ -1,14 +1,15 @@
 import React, { useEffect, useRef, useState } from 'react';
 
-import SearchBar from './SearchBar.tsx';
-import Results from './Results';
 import { useSearch } from '../hooks/useSearch';
 import { useLocalStorage } from '../hooks/useLocalStorage.tsx';
-import Pagination from './Pagination.tsx';
-import { FIRST_PAGE } from '../constants.tsx';
+import { FIRST_PAGE } from '../__utils__/constants.tsx';
 import { Outlet, useParams, useSearchParams } from 'react-router';
+import SearchBar from '../components/SearchBar.tsx';
+import Results from '../components/Results.tsx';
+import Pagination from '../components/Pagination.tsx';
+import type { SearchParams } from '../__utils__/search.ts';
 
-const Search: React.FC = () => {
+const SearchPage: React.FC = () => {
   const { id } = useParams();
 
   const { query, loading, error, results, totalPages, search } = useSearch();
@@ -17,7 +18,7 @@ const Search: React.FC = () => {
   const [params, setParams] = useSearchParams();
   const paramsPage = Number(params.get('page')) || FIRST_PAGE;
 
-  const initialValuesRef = useRef({
+  const initialValuesRef = useRef<SearchParams>({
     query: searchQuery,
     page: paramsPage,
   });
@@ -71,4 +72,4 @@ const Search: React.FC = () => {
   );
 };
 
-export default Search;
+export default SearchPage;

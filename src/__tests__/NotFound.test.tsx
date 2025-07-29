@@ -1,7 +1,7 @@
 import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { Routes, Route } from 'react-router';
-import NotFound from '../components/NotFound';
+import NotFound from '../components/NotFoundPage';
 import { describe, expect, it } from 'vitest';
 import { renderWithRouter } from './testUtils/renderWithRouter.tsx';
 
@@ -9,7 +9,7 @@ function Home() {
   return <div data-testid="home-page">Home Page</div>;
 }
 
-describe('NotFound component', () => {
+describe('NotFoundPage component', () => {
   it('renders 404 message and button', () => {
     renderWithRouter(<NotFound />);
     expect(screen.getByText('404')).toBeInTheDocument();

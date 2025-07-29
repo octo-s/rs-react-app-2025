@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import Search from '../components/Search';
+import Search from '../components/SearchPage';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 const setParamsMock = vi.fn();
@@ -28,7 +28,7 @@ vi.mock('../hooks/useSearch', () => ({
   }),
 }));
 
-describe('Pagination in Search', () => {
+describe('Pagination in SearchPage', () => {
   beforeEach(() => {
     setParamsMock.mockClear();
     mockSearch.mockClear();

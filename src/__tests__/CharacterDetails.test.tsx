@@ -1,13 +1,13 @@
 import { screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { Routes, Route } from 'react-router';
-import CharacterDetails from '../components/CharacterDetails';
+import CharacterDetails from '../components/CharacterPage';
 import * as api from '../api/apiClient';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { renderWithRouter } from './testUtils/renderWithRouter.tsx';
 import { mockRick } from '../mocks/ characters.ts';
 
-describe('CharacterDetails component tests', () => {
+describe('CharacterPage component __tests__', () => {
   beforeEach(() => {
     vi.resetAllMocks();
   });

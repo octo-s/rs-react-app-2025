@@ -1,6 +1,6 @@
 import React from 'react';
 import { useNavigate, useLocation } from 'react-router';
-import type { Character } from '../types.ts';
+import type { Character } from '../__utils__/characters.ts';
 
 type CardProps = {
   character: Character;

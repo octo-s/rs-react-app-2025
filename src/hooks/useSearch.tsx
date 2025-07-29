@@ -1,39 +1,13 @@
 import { useReducer, useCallback } from 'react';
 import { fetchCharacters } from '../api/apiClient';
-import { FIRST_PAGE } from '../constants.tsx';
-import type { Character } from '../types.ts';
+import { FIRST_PAGE, INITIAL_SEARCH_STATE } from '../__utils__/constants.tsx';
+import type {
+  SearchAction,
+  SearchParams,
+  SearchState,
+} from '../__utils__/search.ts';
 
-type SearchParams = {
-  query: string;
-  page: number;
-};
-type SearchState = SearchParams & {
-  totalPages: number;
-  results: Character[];
-  loading: boolean;
-  error: string | null;
-};
-
-type Action =
-  | { type: 'setQuery'; payload: SearchParams }
-  | { type: 'fetchStart' }
-  | {
-      type: 'fetchSuccess';
-      payload: { results: Character[]; totalPages: number };
-    }
-  | { type: 'fetchError'; payload: string }
-  | { type: 'reset' };
-
-export const INITIAL_STATE: SearchState = {
-  query: '',
-  page: FIRST_PAGE,
-  loading: false,
-  error: null,
-  results: [],
-  totalPages: 0,
-};
-
-export function reducer(state: SearchState, action: Action): SearchState {
+export function reducer(state: SearchState, action: SearchAction): SearchState {
   switch (action.type) {
     case 'setQuery':
       return {
@@ -54,14 +28,14 @@ export function reducer(state: SearchState, action: Action): SearchState {
     case 'fetchError':
       return { ...state, loading: false, error: action.payload, results: [] };
     case 'reset':
-      return INITIAL_STATE;
+      return INITIAL_SEARCH_STATE;
     default:
       return state;
   }
 }
 
 export const useSearch = () => {
-  const [state, dispatch] = useReducer(reducer, INITIAL_STATE);
+  const [state, dispatch] = useReducer(reducer, INITIAL_SEARCH_STATE);
 
   const search = useCallback(
     async ({ query, page = FIRST_PAGE }: SearchParams) => {

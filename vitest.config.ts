@@ -6,7 +6,7 @@ export default defineConfig({
   test: {
     environment: 'jsdom',
     globals: true,
-    setupFiles: './src/tests/setupTests.ts',
+    setupFiles: './src/__tests__/setupTests.ts',
     coverage: {
       thresholds: {
         statements: 80,
@@ -26,9 +26,9 @@ export default defineConfig({
         'src/setupTests.{js,ts}',
         'src/**/*.d.ts',
         'src/main.tsx',
-        'src/tests',
+        'src/__tests__',
         'src/texts.ts',
-        'src/types.ts',
+        'src/characters.ts',
       ],
     },
   },
