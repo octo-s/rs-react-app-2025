@@ -1,7 +1,7 @@
 import { screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { Routes, Route } from 'react-router';
-import CharacterDetails from '../components/CharacterPage';
+import CharacterDetails from '../pages/CharacterPage';
 import * as api from '../api/apiClient';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { renderWithRouter } from './testUtils/renderWithRouter.tsx';

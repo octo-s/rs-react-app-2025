@@ -1,20 +1,22 @@
 import React from 'react';
-import { useLocalStorage } from '../hooks/useLocalStorage.tsx';
-import AuthorizedRoutes from './AuthorizedRoutes.tsx';
-import UnauthorizedRoutes from './UnauthorizedRoutes.tsx';
+import { Route, Routes } from 'react-router';
+import Search from '../pages/SearchPage.tsx';
+import CharacterPage from '../pages/CharacterPage.tsx';
+import AboutPage from '../pages/AboutPage.tsx';
+import NotFound from '../pages/NotFoundPage.tsx';
 
 type MainRouterProps = {
   className?: string;
 };
 
-const MainRouter: React.FC<MainRouterProps> = () => {
-  const [userData] = useLocalStorage('user', '');
-
-  return userData ? (
-    <AuthorizedRoutes userData={userData} />
-  ) : (
-    <UnauthorizedRoutes />
-  );
-};
+const MainRouter: React.FC<MainRouterProps> = () => (
+  <Routes>
+    <Route path="/" element={<Search />}>
+      <Route path="/character/:id" element={<CharacterPage />} />
+    </Route>
+    <Route path="/about" element={<AboutPage />} />
+    <Route path="*" element={<NotFound />} />
+  </Routes>
+);
 
 export default MainRouter;

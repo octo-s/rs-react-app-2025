@@ -1,5 +1,5 @@
 import { beforeEach, vi, describe, it, expect } from 'vitest';
-import App from '../components/App';
+import App from '../App.tsx';
 import ErrorBoundary from '../components/ErrorBoundary';
 import { screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';

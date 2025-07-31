@@ -9,7 +9,7 @@ export const TEXTS = {
   fallbackTitle: 'Something went wrong.',
   tryAgain: 'Try again',
   aboutLink: 'About',
-  aboutTitle: 'AboutPage this App',
+  aboutTitle: 'About this App',
   author: 'Author:',
   authorName: ' Tati Lebedeva',
   aboutText:

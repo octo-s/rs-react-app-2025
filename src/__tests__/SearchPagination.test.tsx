@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import Search from '../components/SearchPage';
+import Search from '../pages/SearchPage';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 const setParamsMock = vi.fn();

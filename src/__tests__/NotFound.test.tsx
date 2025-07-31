@@ -1,7 +1,7 @@
 import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { Routes, Route } from 'react-router';
-import NotFound from '../components/NotFoundPage';
+import NotFound from '../pages/NotFoundPage';
 import { describe, expect, it } from 'vitest';
 import { renderWithRouter } from './testUtils/renderWithRouter.tsx';
 

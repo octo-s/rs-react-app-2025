@@ -3,9 +3,9 @@ import { describe, it, expect } from 'vitest';
 import Header from '../components/Header';
 import { renderWithRouter } from './testUtils/renderWithRouter.tsx';
 import { Routes, Route } from 'react-router';
-import About from '../components/AboutPage';
+import About from '../pages/AboutPage';
 import userEvent from '@testing-library/user-event';
-import Search from '../components/SearchPage.tsx';
+import Search from '../pages/SearchPage.tsx';
 
 describe('Header component __tests__', () => {
   it('Rendering: renders the header title', () => {

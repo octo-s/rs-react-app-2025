@@ -1,11 +1,11 @@
 import { render, screen, waitFor } from '@testing-library/react';
-import Search from '../components/SearchPage';
+import Search from '../pages/SearchPage';
 import { describe, it, expect, beforeEach, vi } from 'vitest';
 import userEvent from '@testing-library/user-event';
-import { FIRST_PAGE } from '../__utils__/constants.tsx';
+import { FIRST_PAGE, INITIAL_SEARCH_STATE } from '../__utils__/constants.tsx';
 import { renderWithRouter } from './testUtils/renderWithRouter.tsx';
 import { MemoryRouter, Route, Routes } from 'react-router';
-import { INITIAL_SEARCH_STATE, reducer } from '../hooks/useSearch.tsx';
+import { reducer } from '../hooks/useSearch.tsx';
 import { mockRick } from '../mocks/ characters.ts';
 import { fetchCharacters } from '../api/apiClient';
 import ErrorBoundary from '../components/ErrorBoundary.tsx';
