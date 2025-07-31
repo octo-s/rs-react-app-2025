@@ -5,7 +5,7 @@ import type {
   SearchAction,
   SearchParams,
   SearchState,
-} from '../__utils__/search.ts';
+} from '../__types__/search.ts';
 
 export function reducer(state: SearchState, action: SearchAction): SearchState {
   switch (action.type) {

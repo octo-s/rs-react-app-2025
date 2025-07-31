@@ -7,7 +7,7 @@ import { Outlet, useParams, useSearchParams } from 'react-router';
 import SearchBar from '../components/SearchBar.tsx';
 import Results from '../components/Results.tsx';
 import Pagination from '../components/Pagination.tsx';
-import type { SearchParams } from '../__utils__/search.ts';
+import type { SearchParams } from '../__types__/search.ts';
 
 const SearchPage: React.FC = () => {
   const { id } = useParams();

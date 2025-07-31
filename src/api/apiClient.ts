@@ -1,7 +1,7 @@
 import type {
   FetchCharacterResponse,
   FetchCharactersResponse,
-} from '../__utils__/characters.ts';
+} from '../__types__/characters.ts';
 
 export async function fetchCharacters(
   name: string | undefined = '',

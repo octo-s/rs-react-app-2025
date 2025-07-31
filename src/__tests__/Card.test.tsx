@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import Card from '../components/Card';
 import { describe, it, expect } from 'vitest';
 import { renderWithRouter } from './testUtils/renderWithRouter.tsx';
@@ -6,6 +6,9 @@ import { MemoryRouter, Route, Routes } from 'react-router';
 import userEvent from '@testing-library/user-event';
 import { LocationDisplay } from './testUtils/LocationDisplay.tsx';
 import { mockRick } from '../mocks/ characters.ts';
+import { UNKNOWN_CHARACTER } from '../__utils__/constants.tsx';
+import { Provider } from 'react-redux';
+import { store } from '../store';
 
 describe('Card component __tests__', () => {
   it('Rendering: Displays item name and description correctly', () => {
@@ -34,9 +37,12 @@ describe('Card component __tests__', () => {
 
     expect(screen.getByRole('img')).toHaveAttribute(
       'src',
-      'https://placehold.co/300x300/png'
+      UNKNOWN_CHARACTER.image
     );
-    expect(screen.getByRole('img')).toHaveAttribute('alt', 'Unknown name');
+    expect(screen.getByRole('img')).toHaveAttribute(
+      'alt',
+      UNKNOWN_CHARACTER.name
+    );
     expect(screen.getByText(/Unknown name/i)).toBeInTheDocument();
     expect(
       screen.getByText(/Unknown species - Unknown status/i)
@@ -45,28 +51,32 @@ describe('Card component __tests__', () => {
 
   it('navigates to /character/:id with current search params on click', async () => {
     render(
-      <MemoryRouter initialEntries={['/?page=1']}>
-        <Routes>
-          <Route
-            path="/"
-            element={
-              <>
-                <Card character={mockRick} />
-                <LocationDisplay />
-              </>
-            }
-          />
-          <Route path="/character/:id" element={<LocationDisplay />} />
-        </Routes>
-      </MemoryRouter>
+      <Provider store={store}>
+        <MemoryRouter initialEntries={['/?page=1']}>
+          <Routes>
+            <Route
+              path="/"
+              element={
+                <>
+                  <Card character={mockRick} />
+                  <LocationDisplay />
+                </>
+              }
+            />
+            <Route path="/character/:id" element={<LocationDisplay />} />
+          </Routes>
+        </MemoryRouter>
+      </Provider>
     );
 
     expect(screen.getByTestId('location').textContent).toBe('/?page=1');
 
     await userEvent.click(screen.getByTestId('character-card'));
 
-    expect(screen.getByTestId('location').textContent).toBe(
-      '/character/1?page=1'
-    );
+    await waitFor(() => {
+      expect(screen.getByTestId('location').textContent).toBe(
+        '/character/1?page=1'
+      );
+    });
   });
 });

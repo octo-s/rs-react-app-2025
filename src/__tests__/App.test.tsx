@@ -21,7 +21,7 @@ import { FIRST_PAGE } from '../__utils__/constants.tsx';
 import { renderWithRouter } from './testUtils/renderWithRouter.tsx';
 import { mockInfo, mockResponse } from '../mocks/responses.ts';
 import { mockMorty, mockRick } from '../mocks/ characters.ts';
-import type { FetchCharactersResponse } from '../__utils__/characters.ts';
+import type { FetchCharactersResponse } from '../__types__/characters.ts';
 
 const mockedFetchCharacters = fetchCharacters as (
   name?: string

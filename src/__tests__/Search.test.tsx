@@ -9,7 +9,7 @@ import { reducer } from '../hooks/useSearch.tsx';
 import { mockRick } from '../mocks/ characters.ts';
 import { fetchCharacters } from '../api/apiClient';
 import ErrorBoundary from '../components/ErrorBoundary.tsx';
-import type { FetchCharactersResponse } from '../__utils__/characters.ts';
+import type { FetchCharactersResponse } from '../__types__/characters.ts';
 
 vi.mock('../api/apiClient', async () => {
   const actual =

@@ -1,5 +1,5 @@
 import { mockCharacters } from './ characters.ts';
-import type { FetchCharactersResponse, Info } from '../__utils__/characters.ts';
+import type { FetchCharactersResponse, Info } from '../__types__/characters.ts';
 
 export const mockInfo: Info = {
   count: 0,
