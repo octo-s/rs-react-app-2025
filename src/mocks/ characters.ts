@@ -1,4 +1,4 @@
-import type { Character } from '../types.ts';
+import type { Character } from '../__types__/characters.ts';
 
 export const mockRick: Character = {
   id: 1,

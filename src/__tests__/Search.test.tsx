@@ -1,15 +1,17 @@
 import { render, screen, waitFor } from '@testing-library/react';
-import Search from '../components/Search';
+import Search from '../pages/SearchPage';
 import { describe, it, expect, beforeEach, vi } from 'vitest';
 import userEvent from '@testing-library/user-event';
-import { FIRST_PAGE } from '../constants.tsx';
+import { FIRST_PAGE, INITIAL_SEARCH_STATE } from '../__utils__/constants.ts';
 import { renderWithRouter } from './testUtils/renderWithRouter.tsx';
 import { MemoryRouter, Route, Routes } from 'react-router';
-import { INITIAL_STATE, reducer } from '../hooks/useSearch.tsx';
+import { reducer } from '../hooks/useSearch.tsx';
 import { mockRick } from '../mocks/ characters.ts';
 import { fetchCharacters } from '../api/apiClient';
 import ErrorBoundary from '../components/ErrorBoundary.tsx';
-import type { FetchCharactersResponse } from '../types.ts';
+import type { FetchCharactersResponse } from '../__types__/characters.ts';
+import { store } from '../store';
+import { Provider } from 'react-redux';
 
 vi.mock('../api/apiClient', async () => {
   const actual =
@@ -36,7 +38,7 @@ const mockedFetchCharacters = fetchCharacters as (
   name?: string
 ) => Promise<FetchCharactersResponse> as ReturnType<typeof vi.fn>;
 
-describe('Search Integration', () => {
+describe('SearchPage Integration', () => {
   beforeEach(() => {
     localStorage.clear();
     vi.resetAllMocks();
@@ -140,11 +142,13 @@ describe('Search Integration', () => {
 
   it('Rendering: renders with full width when id is not present', () => {
     render(
-      <MemoryRouter initialEntries={['/']}>
-        <Routes>
-          <Route path="/" element={<Search />} />
-        </Routes>
-      </MemoryRouter>
+      <Provider store={store}>
+        <MemoryRouter initialEntries={['/']}>
+          <Routes>
+            <Route path="/" element={<Search />} />
+          </Routes>
+        </MemoryRouter>
+      </Provider>
     );
     const resultsBlock = screen.getByTestId('results-block');
     expect(resultsBlock).toHaveClass('w-full');
@@ -153,11 +157,13 @@ describe('Search Integration', () => {
 
   it('Rendering: renders with 65% width and margin when id is present', () => {
     render(
-      <MemoryRouter initialEntries={['/character/1']}>
-        <Routes>
-          <Route path="/character/:id" element={<Search />} />
-        </Routes>
-      </MemoryRouter>
+      <Provider store={store}>
+        <MemoryRouter initialEntries={['/character/1']}>
+          <Routes>
+            <Route path="/character/:id" element={<Search />} />
+          </Routes>
+        </MemoryRouter>
+      </Provider>
     );
     const resultsBlock = screen.getByTestId('results-block');
     expect(resultsBlock).toHaveClass('w-[65%]');
@@ -166,6 +172,6 @@ describe('Search Integration', () => {
 
   it('returns INITIAL_STATE on reset action', () => {
     const result = reducer(MOCK_STATE, { type: 'reset' });
-    expect(result).toEqual(INITIAL_STATE);
+    expect(result).toEqual(INITIAL_SEARCH_STATE);
   });
 });

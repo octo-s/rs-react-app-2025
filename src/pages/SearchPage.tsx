@@ -1,23 +1,24 @@
 import React, { useEffect, useRef, useState } from 'react';
 
-import SearchBar from './SearchBar.tsx';
-import Results from './Results';
 import { useSearch } from '../hooks/useSearch';
 import { useLocalStorage } from '../hooks/useLocalStorage.tsx';
-import Pagination from './Pagination.tsx';
-import { FIRST_PAGE } from '../constants.tsx';
+import { FIRST_PAGE } from '../__utils__/constants.ts';
 import { Outlet, useParams, useSearchParams } from 'react-router';
+import SearchBar from '../components/SearchBar.tsx';
+import Results from '../components/Results.tsx';
+import Pagination from '../components/Pagination.tsx';
+import type { SearchParams } from '../__types__/search.ts';
+import SelectedCharacters from '../components/SelectedCharacters.tsx';
 
-const Search: React.FC = () => {
+const SearchPage: React.FC = () => {
   const { id } = useParams();
-
   const { query, loading, error, results, totalPages, search } = useSearch();
   const [searchQuery, setSearchQuery] = useLocalStorage('searchQuery', query);
   const [value, setValue] = useState(searchQuery);
   const [params, setParams] = useSearchParams();
   const paramsPage = Number(params.get('page')) || FIRST_PAGE;
 
-  const initialValuesRef = useRef({
+  const initialValuesRef = useRef<SearchParams>({
     query: searchQuery,
     page: paramsPage,
   });
@@ -67,8 +68,9 @@ const Search: React.FC = () => {
         onPageChange={handlePageChange}
         totalPages={totalPages}
       />
+      <SelectedCharacters />
     </div>
   );
 };
 
-export default Search;
+export default SearchPage;

@@ -6,7 +6,7 @@ const Spinner: React.FC = () => {
       className="flex justify-center items-center py-8"
       data-testid="spinner"
     >
-      <div className="w-12 h-12 border-4 border-blue-500 border-dashed rounded-full animate-spin" />
+      <div className="w-12 h-12 border-4 border-blue-500 border-dashed rounded-full animate-spin dark:border-blue-100" />
     </div>
   );
 };

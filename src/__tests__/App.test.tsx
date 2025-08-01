@@ -1,5 +1,5 @@
 import { beforeEach, vi, describe, it, expect } from 'vitest';
-import App from '../components/App';
+import App from '../App.tsx';
 import ErrorBoundary from '../components/ErrorBoundary';
 import { screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
@@ -17,11 +17,11 @@ vi.mock('../api/apiClient', async () => {
 });
 
 import { fetchCharacters } from '../api/apiClient';
-import { FIRST_PAGE } from '../constants.tsx';
+import { FIRST_PAGE } from '../__utils__/constants.ts';
 import { renderWithRouter } from './testUtils/renderWithRouter.tsx';
 import { mockInfo, mockResponse } from '../mocks/responses.ts';
 import { mockMorty, mockRick } from '../mocks/ characters.ts';
-import type { FetchCharactersResponse } from '../types.ts';
+import type { FetchCharactersResponse } from '../__types__/characters.ts';
 
 const mockedFetchCharacters = fetchCharacters as (
   name?: string
