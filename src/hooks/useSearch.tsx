@@ -1,6 +1,6 @@
 import { useReducer, useCallback } from 'react';
 import { fetchCharacters } from '../api/apiClient';
-import { FIRST_PAGE, INITIAL_SEARCH_STATE } from '../__utils__/constants.tsx';
+import { FIRST_PAGE, INITIAL_SEARCH_STATE } from '../__utils__/constants.ts';
 import type {
   SearchAction,
   SearchParams,

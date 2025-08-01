@@ -2,16 +2,16 @@ import React, { useEffect, useRef, useState } from 'react';
 
 import { useSearch } from '../hooks/useSearch';
 import { useLocalStorage } from '../hooks/useLocalStorage.tsx';
-import { FIRST_PAGE } from '../__utils__/constants.tsx';
+import { FIRST_PAGE } from '../__utils__/constants.ts';
 import { Outlet, useParams, useSearchParams } from 'react-router';
 import SearchBar from '../components/SearchBar.tsx';
 import Results from '../components/Results.tsx';
 import Pagination from '../components/Pagination.tsx';
 import type { SearchParams } from '../__types__/search.ts';
+import SelectedCharacters from '../components/SelectedCharacters.tsx';
 
 const SearchPage: React.FC = () => {
   const { id } = useParams();
-
   const { query, loading, error, results, totalPages, search } = useSearch();
   const [searchQuery, setSearchQuery] = useLocalStorage('searchQuery', query);
   const [value, setValue] = useState(searchQuery);
@@ -68,6 +68,7 @@ const SearchPage: React.FC = () => {
         onPageChange={handlePageChange}
         totalPages={totalPages}
       />
+      <SelectedCharacters />
     </div>
   );
 };

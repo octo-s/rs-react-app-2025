@@ -7,7 +7,7 @@ import {
   selectItem,
   unselectItem,
 } from '../entities/selected/selectedSlice.ts';
-import { UNKNOWN_CHARACTER } from '../__utils__/constants.tsx';
+import { UNKNOWN_CHARACTER } from '../__utils__/constants.ts';
 
 type CardProps = {
   character: Character;
@@ -21,15 +21,19 @@ const Card: React.FC<CardProps> = ({ character }) => {
   const navigate = useNavigate();
   const location = useLocation();
   const dispatch = useDispatch();
-  const selectedIds = useSelector(
-    (state: RootState) => state.selected.selectedIds
+  const selectedCharacters = useSelector(
+    (state: RootState) => state.selected.selectedCharacters
   );
-  const checked = selectedIds.includes(character.id);
+
+  const checked = !!selectedCharacters.find(
+    (selectedCharacter) => selectedCharacter.id === character.id
+  );
+
   const handleCheckbox = () => {
     if (checked) {
-      dispatch(unselectItem(character.id));
+      dispatch(unselectItem(character));
     } else {
-      dispatch(selectItem(character.id));
+      dispatch(selectItem(character));
     }
   };
 

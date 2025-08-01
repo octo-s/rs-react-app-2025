@@ -17,7 +17,7 @@ vi.mock('../api/apiClient', async () => {
 });
 
 import { fetchCharacters } from '../api/apiClient';
-import { FIRST_PAGE } from '../__utils__/constants.tsx';
+import { FIRST_PAGE } from '../__utils__/constants.ts';
 import { renderWithRouter } from './testUtils/renderWithRouter.tsx';
 import { mockInfo, mockResponse } from '../mocks/responses.ts';
 import { mockMorty, mockRick } from '../mocks/ characters.ts';

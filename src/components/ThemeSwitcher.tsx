@@ -6,11 +6,8 @@ export const ThemeSwitcher: React.FC = () => {
   const { toggleTheme } = useContext(ThemeContext);
 
   return (
-    <Button
-      aria-label="Toggle theme"
-      text="Toggle theme"
-      onClick={toggleTheme}
-      variant="secondary"
-    />
+    <Button aria-label="Toggle theme" onClick={toggleTheme} variant="secondary">
+      Toggle theme
+    </Button>
   );
 };

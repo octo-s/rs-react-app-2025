@@ -13,8 +13,19 @@ export const INITIAL_SEARCH_STATE: SearchState = {
 };
 
 export const UNKNOWN_CHARACTER: Partial<Character> = {
+  id: 0,
   name: 'Unknown name',
   species: 'Unknown species',
   status: 'Unknown status',
   image: 'https://placehold.co/300x300/png',
+  gender: 'Unknown gender',
 };
+
+export const NECESSARY_FIELDS = [
+  'id',
+  'name',
+  'status',
+  'species',
+  'image',
+  'gender',
+] as const;

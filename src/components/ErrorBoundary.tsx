@@ -38,11 +38,9 @@ export default class ErrorBoundary extends React.Component<
         <div className="p-8 text-center" data-testid="fallback">
           <h1 className="text-2xl font-bold mb-4">{TEXTS.fallbackTitle}</h1>
           <p className="text-gray-600 mb-4">{this.state.error?.message}</p>
-          <Button
-            onClick={this.handleReload}
-            data-testid="try-again-button"
-            text={TEXTS.tryAgain}
-          />
+          <Button onClick={this.handleReload} data-testid="try-again-button">
+            {TEXTS.tryAgain}
+          </Button>
         </div>
       );
     }

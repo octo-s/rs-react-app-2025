@@ -1,32 +1,37 @@
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
+import type { Character } from '../../__types__/characters.ts';
 
 type SelectedState = {
-  selectedIds: number[];
+  selectedCharacters: Character[];
 };
 
 const initialState: SelectedState = {
-  selectedIds: [],
+  selectedCharacters: [],
 };
 
 const selectedSlice = createSlice({
   name: 'selected',
   initialState,
   reducers: {
-    selectItem(state, action: PayloadAction<number>) {
-      if (!state.selectedIds.includes(action.payload)) {
-        state.selectedIds.push(action.payload);
+    selectItem(state, action: PayloadAction<Character>) {
+      if (!state.selectedCharacters.some((c) => c.id === action.payload.id)) {
+        state.selectedCharacters.push(action.payload);
       }
     },
-    unselectItem(state, action: PayloadAction<number>) {
-      state.selectedIds = state.selectedIds.filter(
-        (id) => id !== action.payload
+    unselectItem(state, action: PayloadAction<Character>) {
+      state.selectedCharacters = state.selectedCharacters.filter(
+        (char) => char.id !== action.payload.id
       );
     },
     unselectAll(state) {
-      state.selectedIds = [];
+      state.selectedCharacters = [];
+    },
+    selectAll(state, action: PayloadAction<Character[]>) {
+      state.selectedCharacters = action.payload;
     },
   },
 });
 
-export const { selectItem, unselectItem, unselectAll } = selectedSlice.actions;
+export const { selectItem, unselectItem, unselectAll, selectAll } =
+  selectedSlice.actions;
 export default selectedSlice.reducer;

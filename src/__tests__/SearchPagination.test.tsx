@@ -1,7 +1,8 @@
-import { render, screen } from '@testing-library/react';
+import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import Search from '../pages/SearchPage';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
+import { renderWithRouter } from './testUtils/renderWithRouter.tsx';
 
 const setParamsMock = vi.fn();
 vi.mock('react-router', async () => {
@@ -35,7 +36,7 @@ describe('Pagination in SearchPage', () => {
   });
 
   it('calls setParams and search on next page click', async () => {
-    render(<Search />);
+    renderWithRouter(<Search />);
     const nextButton = screen.getByRole('button', { name: '>' });
 
     await userEvent.click(nextButton);

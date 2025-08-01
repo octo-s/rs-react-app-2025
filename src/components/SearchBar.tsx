@@ -31,12 +31,9 @@ const SearchBar: React.FC<SearchProps> = ({ onSearch, value, onChange }) => {
           data-testid="search-input"
           placeholder={TEXTS.searchPlaceholder}
         />
-        <Button
-          data-testid="search-button"
-          onClick={onSearch}
-          text={TEXTS.searchButton}
-          className="ml-8"
-        />
+        <Button data-testid="search-button" onClick={onSearch} className="ml-8">
+          {TEXTS.searchButton}
+        </Button>
       </div>
     </div>
   );
