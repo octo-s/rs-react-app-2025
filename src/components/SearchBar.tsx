@@ -1,6 +1,7 @@
 import React from 'react';
 import Button from './Button.tsx';
 import { TEXTS } from '../texts.ts';
+import { ENTER_BUTTON_KEY } from '../__utils__/constants.ts';
 
 type SearchProps = {
   onSearch: () => void;
@@ -14,7 +15,7 @@ const SearchBar: React.FC<SearchProps> = ({ onSearch, value, onChange }) => {
   };
 
   const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
-    if (event.key === 'Enter') {
+    if (event.key === ENTER_BUTTON_KEY) {
       onSearch();
     }
   };

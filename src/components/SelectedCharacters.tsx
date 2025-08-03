@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import type { RootState } from '../store';
 import Flyout from './Flyout.tsx';
 import { arrayToCSV } from '../__utils__/arrayToCSV.ts';
+import { TEXTS } from '../texts.ts';
 
 const SelectedCharacters: React.FC = () => {
   const [show, setShow] = useState(false);
@@ -51,7 +52,7 @@ const SelectedCharacters: React.FC = () => {
         className="px-6 py-2 rounded font-semibold shadow outline-none border-none transition bg-blue-600 text-white hover:text-white dark:bg-red-900"
         href=""
       >
-        Download
+        {TEXTS.download}
       </a>
     </Flyout>
   );

@@ -1,5 +1,6 @@
 import React from 'react';
 import Button from './Button.tsx';
+import { TEXTS } from '../texts.ts';
 
 type FlyoutProps = {
   count: number;
@@ -17,12 +18,12 @@ const Flyout: React.FC<FlyoutProps> = ({ count, onUnselectAll, children }) => {
     >
       <div className="flex items-center justify-around gap-2 bg-white dark:bg-gray-900 shadow-lg rounded-2xl px-10 py-10 mb-0 border-4 border-blue-400 dark:border-gray-700 w-[510px] pointer-events-auto transition-all">
         <span className="font-semibold text-gray-900 dark:text-gray-100 text-lg flex-1">
-          {count > 0 && `${count} ${count === 1 ? 'item' : 'items'} selected`}
-          {count === 0 && 'Bye!'}
+          {count > 0 && TEXTS.itemSelected(count)}
+          {count === 0 && TEXTS.bye}
         </span>
         <>
           <Button onClick={onUnselectAll} variant="secondary">
-            Unselect all
+            {TEXTS.unselectAll}
           </Button>
           {children}
         </>

@@ -32,4 +32,10 @@ export const TEXTS = {
   notExist: 'Sorry, the page you’re looking for doesn’t exist.',
   notFoundTitle: '404',
   hello: 'Hello, ',
+  toggleTheme: 'Toggle theme',
+  download: 'Download',
+  unselectAll: 'Unselect all',
+  bye: 'Bye!',
+  itemSelected: (count: number) =>
+    `${count} ${count === 1 ? 'item' : 'items'} selected`,
 };

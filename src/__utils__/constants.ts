@@ -3,6 +3,8 @@ import type { Character } from '../__types__/characters.ts';
 
 export const FIRST_PAGE = 1;
 
+export const ENTER_BUTTON_KEY = 'Enter';
+
 export const INITIAL_SEARCH_STATE: SearchState = {
   query: '',
   page: FIRST_PAGE,
