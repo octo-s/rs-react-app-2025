@@ -23,7 +23,7 @@ export function arrayToCSV(items: Character[]): string {
   const csvValues = items.map((item) =>
     NECESSARY_FIELDS.map((key) =>
       escapeCSV(getFieldValue(key, item[key]))
-    ).join(',')
+    ).join('\n')
   );
 
   return [csvHeaders, csvValues].join('\n');
