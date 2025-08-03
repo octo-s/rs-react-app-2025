@@ -1,7 +1,7 @@
 import React from 'react';
 import CardList from './CardList';
 import Spinner from './Spinner.tsx';
-import type { Character } from '../types.ts';
+import type { Character } from '../__types__/characters.ts';
 import { TEXTS } from '../texts.ts';
 
 type ResultsProps = {
@@ -12,8 +12,10 @@ type ResultsProps = {
 
 const Results: React.FC<ResultsProps> = ({ characters, loading, error }) => {
   return (
-    <div className="bg-white p-4 rounded shadow min-h-[200px]">
-      <h2 className="text-xl font-semibold mb-2">{TEXTS.resultsTitle}</h2>
+    <div className="bg-white p-4 rounded shadow min-h-[200px] dark:bg-gray-300">
+      <h2 className="text-xl font-semibold mb-2 dark:text-gray-700">
+        {TEXTS.resultsTitle}
+      </h2>
 
       {loading && <Spinner />}
 

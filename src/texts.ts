@@ -1,6 +1,6 @@
 export const TEXTS = {
   headerTitle: 'Rick and Morty Explorer',
-  searchPlaceholder: 'Search characters by name...',
+  searchPlaceholder: 'SearchPage characters by name...',
   searchButton: 'Search',
   resultsTitle: 'Results',
   noResults: 'No results found.',
@@ -31,4 +31,11 @@ export const TEXTS = {
     `Page ${page} of ${totalPages}`,
   notExist: 'Sorry, the page you’re looking for doesn’t exist.',
   notFoundTitle: '404',
+  hello: 'Hello, ',
+  toggleTheme: 'Toggle theme',
+  download: 'Download',
+  unselectAll: 'Unselect all',
+  bye: 'Bye!',
+  itemSelected: (count: number) =>
+    `${count} ${count === 1 ? 'item' : 'items'} selected`,
 };

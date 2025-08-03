@@ -1,5 +1,6 @@
 import React from 'react';
 import { TEXTS } from '../texts.ts';
+import Button from './Button.tsx';
 
 type ErrorBoundaryProps = {
   children: React.ReactNode;
@@ -37,13 +38,9 @@ export default class ErrorBoundary extends React.Component<
         <div className="p-8 text-center" data-testid="fallback">
           <h1 className="text-2xl font-bold mb-4">{TEXTS.fallbackTitle}</h1>
           <p className="text-gray-600 mb-4">{this.state.error?.message}</p>
-          <button
-            onClick={this.handleReload}
-            className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
-            data-testid="try-again-button"
-          >
+          <Button onClick={this.handleReload} data-testid="try-again-button">
             {TEXTS.tryAgain}
-          </button>
+          </Button>
         </div>
       );
     }
