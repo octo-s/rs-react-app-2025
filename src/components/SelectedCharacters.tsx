@@ -47,6 +47,7 @@ const SelectedCharacters: React.FC = () => {
   return (
     <Flyout onUnselectAll={onUnselectAll} count={count}>
       <a
+        data-testid="download-link"
         onClick={handleClick}
         ref={linkRef}
         className="px-6 py-2 rounded font-semibold shadow outline-none border-none transition bg-blue-600 text-white hover:text-white dark:bg-red-900"

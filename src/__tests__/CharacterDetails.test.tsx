@@ -5,9 +5,9 @@ import CharacterDetails from '../pages/CharacterPage';
 import * as api from '../api/apiClient';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { renderWithRouter } from './testUtils/renderWithRouter.tsx';
-import { mockRick } from '../mocks/ characters.ts';
+import { mockRick } from '../mocks/characters.ts';
 
-describe('CharacterPage component __tests__', () => {
+describe('CharacterPage component', () => {
   beforeEach(() => {
     vi.resetAllMocks();
   });

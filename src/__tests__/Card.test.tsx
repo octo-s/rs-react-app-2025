@@ -5,12 +5,12 @@ import { renderWithRouter } from './testUtils/renderWithRouter.tsx';
 import { MemoryRouter, Route, Routes } from 'react-router';
 import userEvent from '@testing-library/user-event';
 import { LocationDisplay } from './testUtils/LocationDisplay.tsx';
-import { mockRick } from '../mocks/ characters.ts';
+import { mockRick } from '../mocks/characters.ts';
 import { UNKNOWN_CHARACTER } from '../__utils__/constants.ts';
 import { Provider } from 'react-redux';
 import { store } from '../store';
 
-describe('Card component __tests__', () => {
+describe('Card component', () => {
   it('Rendering: Displays item name and description correctly', () => {
     renderWithRouter(<Card character={mockRick} />);
     expect(screen.getByText('Rick Sanchez')).toBeInTheDocument();

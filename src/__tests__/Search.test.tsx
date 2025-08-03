@@ -6,7 +6,7 @@ import { FIRST_PAGE, INITIAL_SEARCH_STATE } from '../__utils__/constants.ts';
 import { renderWithRouter } from './testUtils/renderWithRouter.tsx';
 import { MemoryRouter, Route, Routes } from 'react-router';
 import { reducer } from '../hooks/useSearch.tsx';
-import { mockRick } from '../mocks/ characters.ts';
+import { mockRick } from '../mocks/characters.ts';
 import { fetchCharacters } from '../api/apiClient';
 import ErrorBoundary from '../components/ErrorBoundary.tsx';
 import type { FetchCharactersResponse } from '../__types__/characters.ts';

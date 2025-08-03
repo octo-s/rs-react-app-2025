@@ -3,7 +3,7 @@ import Pagination from '../components/Pagination';
 import { describe, it, expect, vi } from 'vitest';
 import userEvent from '@testing-library/user-event';
 
-describe('Pagination Component', () => {
+describe('Pagination component', () => {
   it('Rendering: does not render if totalPages is 1 or less', () => {
     const { container } = render(
       <Pagination page={1} totalPages={1} onPageChange={() => {}} />

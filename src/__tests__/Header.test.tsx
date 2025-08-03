@@ -7,7 +7,7 @@ import About from '../pages/AboutPage';
 import userEvent from '@testing-library/user-event';
 import Search from '../pages/SearchPage.tsx';
 
-describe('Header component __tests__', () => {
+describe('Header component ', () => {
   it('Rendering: renders the header title', () => {
     renderWithRouter(<Header />);
     expect(

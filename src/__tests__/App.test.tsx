@@ -20,7 +20,7 @@ import { fetchCharacters } from '../api/apiClient';
 import { FIRST_PAGE } from '../__utils__/constants.ts';
 import { renderWithRouter } from './testUtils/renderWithRouter.tsx';
 import { mockInfo, mockResponse } from '../mocks/responses.ts';
-import { mockMorty, mockRick } from '../mocks/ characters.ts';
+import { mockMorty, mockRick } from '../mocks/characters.ts';
 import type { FetchCharactersResponse } from '../__types__/characters.ts';
 
 const mockedFetchCharacters = fetchCharacters as (
@@ -35,7 +35,7 @@ function renderApp() {
   );
 }
 
-describe('Main App Component Tests', () => {
+describe('Main App component', () => {
   beforeEach(() => {
     localStorage.clear();
     vi.restoreAllMocks();

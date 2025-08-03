@@ -1,8 +1,9 @@
 import { render, screen } from '@testing-library/react';
 import SearchBar from '../components/SearchBar';
 import { describe, it, expect, beforeEach, vi } from 'vitest';
+import userEvent from '@testing-library/user-event';
 
-describe('SearchBar Component Tests', () => {
+describe('SearchBar component', () => {
   const mockOnSearch = vi.fn();
   const mockOnChange = vi.fn();
 
@@ -24,5 +25,19 @@ describe('SearchBar Component Tests', () => {
       <SearchBar value="Rick" onSearch={vi.fn()} onChange={mockOnChange} />
     );
     expect(screen.getByTestId('search-input')).toHaveValue('Rick');
+  });
+
+  it('User Interaction: calls onSearch when Enter is pressed in input', async () => {
+    const user = userEvent.setup();
+    const onSearch = vi.fn();
+    const onChange = vi.fn();
+
+    render(<SearchBar value="Morty" onChange={onChange} onSearch={onSearch} />);
+
+    const input = screen.getByTestId('search-input');
+
+    await user.type(input, '{enter}');
+
+    expect(onSearch).toHaveBeenCalled();
   });
 });

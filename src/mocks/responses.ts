@@ -1,4 +1,4 @@
-import { mockCharacters } from './ characters.ts';
+import { mockCharacters } from './characters.ts';
 import type { FetchCharactersResponse, Info } from '../__types__/characters.ts';
 
 export const mockInfo: Info = {

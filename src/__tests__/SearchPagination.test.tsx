@@ -29,7 +29,7 @@ vi.mock('../hooks/useSearch', () => ({
   }),
 }));
 
-describe('Pagination in SearchPage', () => {
+describe('Pagination component', () => {
   beforeEach(() => {
     setParamsMock.mockClear();
     mockSearch.mockClear();
